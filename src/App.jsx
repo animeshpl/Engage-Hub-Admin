@@ -1,54 +1,51 @@
 import {
-  AlertTriangle,
+  ArrowRight,
+  ArrowUpDown,
   BarChart3,
   Bell,
   Building2,
   CalendarDays,
-  CheckCircle,
+  CheckCircle2,
   ChevronDown,
   ChevronLeft,
   ChevronRight,
-  Coins,
+  CircleHelp,
+  Clock3,
+  Columns3,
   Download,
+  ExternalLink,
   FileText,
-  Gamepad2,
+  Filter,
   Gift,
   HelpCircle,
   Home,
   Layers,
-  Lightbulb,
+  LayoutGrid,
   MapPin,
   Megaphone,
-  MessageSquare,
   Package,
+  Plus,
   QrCode,
+  RefreshCw,
   Search,
-  Settings,
-  Shield,
+  ShieldCheck,
   ShoppingBag,
   Star,
-  Ticket,
-  Upload,
   User,
-  UserPlus,
-  Users,
   Wallet,
-  Zap,
-  Info,
-  Grid3X3,
 } from "lucide-react";
 
 const navSections = [
   {
-    label: "",
-    items: [{ label: "Dashboard", icon: Home, active: true, chevron: false }],
+    label: "Dashboard",
+    items: [{ label: "Dashboard", icon: Home }],
   },
   {
     label: "User & Access",
     items: [
       { label: "User Management", icon: User },
-      { label: "Roles & Permissions", icon: Shield },
-      { label: "Approvals", icon: CheckCircle },
+      { label: "Roles & Permissions", icon: ShieldCheck },
+      { label: "Approvals", icon: CheckCircle2 },
     ],
   },
   {
@@ -70,11 +67,17 @@ const navSections = [
   {
     label: "Campaign & Program",
     items: [
-      { label: "Program Management", icon: Star },
+      {
+        label: "Program Management",
+        icon: Home,
+        activeParent: true,
+        expanded: true,
+        children: [{ label: "Program List", active: true }],
+      },
       { label: "Campaign Management", icon: Megaphone },
       { label: "Scheme Management", icon: Layers },
-      { label: "Gamification", icon: Gamepad2 },
-      { label: "Budget & Allocation", icon: Wallet },
+      { label: "Gamification", icon: Star },
+      { label: "Budget & Allocation", icon: BarChart3 },
     ],
   },
   {
@@ -82,208 +85,181 @@ const navSections = [
     items: [
       { label: "Wallet", icon: Wallet },
       { label: "Rewards", icon: Gift },
-      { label: "Coupons", icon: Ticket },
-    ],
-  },
-  {
-    label: "Communication & Notifications",
-    items: [
-      { label: "Communication Center", icon: MessageSquare },
-      { label: "Templates", icon: CalendarDays },
-      { label: "Content Management", icon: FileText },
-    ],
-  },
-  {
-    label: "Reports & Analytics",
-    items: [
-      { label: "Reports", icon: BarChart3 },
-      { label: "Analytics", icon: BarChart3 },
-      { label: "Export Center", icon: Download },
-    ],
-  },
-  {
-    label: "Utilities",
-    items: [
-      { label: "Bulk Operations", icon: Upload },
-      { label: "Downloads", icon: Download },
-      { label: "System Utilities", icon: Settings },
     ],
   },
 ];
 
 const kpis = [
   {
-    label: "Active Campaigns",
+    label: "Total Programs",
     value: "78",
-    trend: "12%",
-    icon: Megaphone,
-    iconClass: "bg-emerald-50 text-[#079455]",
+    description: "Across all program types",
+    icon: BarChart3,
+    tone: "bg-emerald-50 text-[#079455]",
   },
   {
-    label: "Total Users",
-    value: "1,24,560",
-    trend: "8%",
-    icon: UserPlus,
-    iconClass: "bg-blue-50 text-[#2563EB]",
-  },
-  {
-    label: "Wallet Transactions",
-    value: "5,43,210",
-    trend: "15%",
-    icon: Wallet,
-    iconClass: "bg-purple-50 text-[#7C3AED]",
-  },
-  {
-    label: "Points Issued",
-    value: "12.8M",
-    trend: "18%",
-    icon: Coins,
-    iconClass: "bg-orange-50 text-[#F97316]",
-  },
-  {
-    label: "Coupons Redeemed",
-    value: "98,765",
-    trend: "10%",
-    icon: Ticket,
-    iconClass: "bg-pink-50 text-[#DB2777]",
-  },
-];
-
-const campaignRows = [
-  ["Summer Bonanza 2025", "24,560", "18%"],
-  ["Mega Rewards", "18,230", "12%"],
-  ["Spin & Win", "14,890", "10%"],
-  ["Festive Delight", "12,456", "8%"],
-  ["Refer & Earn", "9,876", "6%"],
-];
-
-const activities = [
-  {
-    text: "Point upload completed for March 2025",
-    time: "10 mins ago",
-    color: "bg-[#079455]",
-  },
-  {
-    text: 'Campaign "Summer Bonanza" published',
-    time: "1 hour ago",
-    color: "bg-[#7C3AED]",
-  },
-  {
-    text: "User import completed successfully",
-    time: "3 hours ago",
-    color: "bg-[#2563EB]",
-  },
-  {
-    text: "Bank verification completed for 250 users",
-    time: "5 hours ago",
-    color: "bg-[#F97316]",
-  },
-  {
-    text: "Coupon code generated for campaign",
-    time: "Yesterday",
-    color: "bg-[#DB2777]",
-  },
-];
-
-const statusItems = [
-  ["Active", "78 (51%)", "#079455"],
-  ["Upcoming", "32 (21%)", "#2563EB"],
-  ["Ongoing", "24 (16%)", "#7C3AED"],
-  ["Ended", "18 (12%)", "#F97316"],
-];
-
-const walletMetrics = [
-  {
-    label: "Total Wallet Balance",
-    value: "₹ 3,45,67,890",
-    trend: "11%",
-    color: "#079455",
-    points: "8,42 26,34 42,30 58,21 74,36 88,31 102,42 116,19 132,27 146,17 160,31 176,33 190,24",
-  },
-  {
-    label: "Total Points Issued",
-    value: "12.8M",
-    trend: "18%",
-    color: "#F97316",
-    points: "8,36 22,29 38,21 52,12 68,27 82,39 96,25 112,30 126,14 140,22 154,10 168,25 182,20 194,14",
-  },
-  {
-    label: "Total Points Redeemed",
-    value: "9.6M",
-    trend: "14%",
-    color: "#2563EB",
-    points: "8,42 24,36 40,22 56,31 72,38 88,29 104,36 118,17 132,24 146,11 162,23 176,29 192,17",
-  },
-];
-
-const approvals = [
-  {
-    label: "Registration",
-    count: "24",
-    icon: UserPlus,
-    iconClass: "bg-blue-50 text-[#2563EB]",
-    badgeClass: "bg-orange-50 text-[#F97316]",
-  },
-  {
-    label: "Profile Approval",
-    count: "18",
-    icon: UserPlus,
-    iconClass: "bg-emerald-50 text-[#079455]",
-    badgeClass: "bg-emerald-50 text-[#079455]",
-  },
-  {
-    label: "Redemption",
-    count: "12",
-    icon: Gift,
-    iconClass: "bg-orange-50 text-[#F97316]",
-    badgeClass: "bg-orange-50 text-[#F97316]",
-  },
-  {
-    label: "Campaign",
-    count: "07",
-    icon: Megaphone,
-    iconClass: "bg-purple-50 text-[#7C3AED]",
-    badgeClass: "bg-purple-50 text-[#7C3AED]",
-  },
-  {
-    label: "Coupons",
-    count: "05",
-    icon: Ticket,
-    iconClass: "bg-pink-50 text-[#DB2777]",
-    badgeClass: "bg-pink-50 text-[#DB2777]",
-  },
-];
-
-const alerts = [
-  {
-    text: "3 campaigns are nearing end date",
-    time: "2h ago",
-    icon: AlertTriangle,
-    tone: "bg-orange-50 text-[#F97316]",
-  },
-  {
-    text: "Scheduled maintenance on 25 May 2025, 02:00 AM - 04:00 AM",
-    time: "1d ago",
-    icon: Info,
+    label: "Active Programs",
+    value: "48",
+    description: "61.5% of total programs",
+    icon: CheckCircle2,
     tone: "bg-blue-50 text-[#2563EB]",
   },
   {
-    text: "Wallet reconciliation pending",
-    time: "2d ago",
-    icon: AlertTriangle,
+    label: "Pending Approval",
+    value: "6",
+    description: "6 awaiting approval",
+    icon: Clock3,
     tone: "bg-orange-50 text-[#F97316]",
+  },
+  {
+    label: "Budget Utilization",
+    value: "64%",
+    description: "64 budgets linked",
+    icon: BarChart3,
+    tone: "bg-purple-50 text-[#7C3AED]",
   },
 ];
 
-const quickLinks = [
-  ["Create Campaign", Megaphone, "text-teal-500 bg-teal-50"],
-  ["Point Upload", Upload, "text-[#2563EB] bg-blue-50"],
-  ["Create Coupon", Ticket, "text-[#DB2777] bg-pink-50"],
-  ["Upload QR Batch", QrCode, "text-slate-500 bg-slate-50"],
-  ["Bulk User Import", Users, "text-[#079455] bg-emerald-50"],
-  ["Generate Report", FileText, "text-[#2563EB] bg-blue-50"],
-  ["Approval Center", CheckCircle, "text-[#F97316] bg-orange-50"],
-  ["View All", Grid3X3, "text-slate-500 bg-slate-50"],
+const tabs = [
+  ["All", "78"],
+  ["Active", "48"],
+  ["Draft", "12"],
+  ["Pending Approval", "6"],
+  ["Paused", "4"],
+  ["Ended", "8"],
+];
+
+const programs = [
+  {
+    name: "Retailer Growth League",
+    code: "PRG-2401",
+    owner: "Ankit Sharma",
+    category: "Retail Growth",
+    campaigns: "8 linked",
+    dateRange: "12 Aug 2026 - 30 Sep",
+    amount: "INR 82.4L",
+    used: 64,
+    approval: "Approved",
+    status: "Active",
+    avatar: "RG",
+    avatarClass: "bg-[#079455]",
+    progressClass: "bg-[#079455]",
+  },
+  {
+    name: "Festive Spark",
+    code: "PRG-2402",
+    owner: "Priya Nair",
+    category: "Festive Incentive",
+    campaigns: "5 linked",
+    dateRange: "18 Aug 2026 - 30 Sep",
+    amount: "INR 44.8L",
+    used: 51,
+    approval: "In Review",
+    status: "Active",
+    avatar: "FS",
+    avatarClass: "bg-[#F59E0B]",
+    progressClass: "bg-[#2563EB]",
+  },
+  {
+    name: "QR Scan Booster",
+    code: "PRG-2403",
+    owner: "Rahul Mehta",
+    category: "Scan Rewards",
+    campaigns: "3 linked",
+    dateRange: "24 Aug 2026 - 30 Sep",
+    amount: "INR 18.2L",
+    used: 72,
+    approval: "Pending",
+    status: "Draft",
+    avatar: "QS",
+    avatarClass: "bg-[#2563EB]",
+    progressClass: "bg-[#2563EB]",
+  },
+  {
+    name: "Elite Partner Club",
+    code: "PRG-2404",
+    owner: "Sneha Rao",
+    category: "Loyalty",
+    campaigns: "12 linked",
+    dateRange: "01 Sep 2026 - 31 Dec",
+    amount: "INR 1.2Cr",
+    used: 58,
+    approval: "Approved",
+    status: "Active",
+    avatar: "EP",
+    avatarClass: "bg-[#7C3AED]",
+    progressClass: "bg-[#079455]",
+  },
+  {
+    name: "Monsoon Dealer Drive",
+    code: "PRG-2405",
+    owner: "Vikram Desai",
+    category: "Channel Growth",
+    campaigns: "6 linked",
+    dateRange: "05 Jul 2026 - 31 Aug",
+    amount: "INR 35.1L",
+    used: 93,
+    approval: "Attention",
+    status: "Paused",
+    avatar: "MD",
+    avatarClass: "bg-[#EF4444]",
+    progressClass: "bg-[#EF4444]",
+  },
+  {
+    name: "New Retailer Onboarding",
+    code: "PRG-2406",
+    owner: "Meera Joshi",
+    category: "Onboarding",
+    campaigns: "2 linked",
+    dateRange: "01 Sep 2026 - 30 Nov",
+    amount: "INR 9.6L",
+    used: 22,
+    approval: "Draft",
+    status: "Draft",
+    avatar: "NR",
+    avatarClass: "bg-[#0EA5A4]",
+    progressClass: "bg-[#079455]",
+  },
+];
+
+const overview = [
+  ["Active", "48", "#079455"],
+  ["Draft", "12", "#F59E0B"],
+  ["Pending", "6", "#2563EB"],
+  ["Paused", "4", "#EF4444"],
+  ["Ended", "8", "#CBD5E1"],
+];
+
+const recentlyUpdated = [
+  {
+    name: "Retailer Growth League",
+    note: "Budget mapping updated",
+    time: "11:05 AM",
+    avatar: "RG",
+    avatarClass: "bg-[#079455]",
+  },
+  {
+    name: "Festive Spark",
+    note: "Approval note added",
+    time: "09:42 AM",
+    avatar: "FS",
+    avatarClass: "bg-[#F59E0B]",
+  },
+  {
+    name: "QR Scan Booster",
+    note: "Eligibility changed",
+    time: "Yesterday",
+    avatar: "QS",
+    avatarClass: "bg-[#2563EB]",
+  },
+];
+
+const quickActions = [
+  ["Create Program", Plus],
+  ["Import Program Mapping", Download],
+  ["Configure Categories", LayoutGrid],
+  ["View Budget Allocation", BarChart3],
+  ["Approval Queue", CheckCircle2],
 ];
 
 function classNames(...classes) {
@@ -294,7 +270,7 @@ function Card({ children, className = "" }) {
   return (
     <section
       className={classNames(
-        "rounded-xl border border-[#E5EAF0] bg-white shadow-card",
+        "rounded-xl border border-[#E5EAF0] bg-white shadow-sm",
         className,
       )}
     >
@@ -303,28 +279,10 @@ function Card({ children, className = "" }) {
   );
 }
 
-function CardHeader({ title, action, children }) {
-  return (
-    <div className="flex min-h-8 items-center justify-between gap-3">
-      <h2 className="text-[15px] font-semibold leading-none text-[#101828]">
-        {title}
-      </h2>
-      {children || (
-        action && (
-          <a href="#" className="text-[11px] font-semibold text-[#079455]">
-            {action}
-          </a>
-        )
-      )}
-    </div>
-  );
-}
-
 function PineLogo() {
   return (
-    <div className="relative h-7 w-7 shrink-0">
-      <span className="absolute left-0 top-0 h-5 w-7 bg-[#11B76A] [clip-path:polygon(0_0,100%_0,100%_100%)]" />
-      <span className="absolute left-1 top-3.5 h-4 w-5 rotate-180 bg-[#11B76A] [clip-path:polygon(0_0,100%_0,100%_100%)]" />
+    <div className="relative grid h-[30px] w-[30px] shrink-0 place-items-center overflow-hidden rounded-lg bg-[#12B76A]">
+      <span className="absolute h-4 w-4 -translate-x-0.5 translate-y-0.5 rotate-45 rounded-[2px] bg-[#071827]" />
     </div>
   );
 }
@@ -333,52 +291,66 @@ function SidebarItem({ item }) {
   const Icon = item.icon;
 
   return (
-    <a
-      href="#"
-      className={classNames(
-        "grid h-7 grid-cols-[18px_1fr_12px] items-center gap-2 rounded-lg px-2 text-[11px] font-semibold leading-none text-white/[0.92] transition",
-        item.active
-          ? "bg-gradient-to-r from-[#078B4F] to-[#079455] shadow-[0_8px_20px_rgba(7,148,85,0.25)]"
-          : "hover:bg-white/[0.08]",
+    <div>
+      <a
+        href="#"
+        className={classNames(
+          "grid h-8 grid-cols-[18px_1fr_14px] items-center gap-2 rounded-lg px-2 text-[12px] font-semibold text-white/[0.92] transition",
+          item.activeParent
+            ? "bg-[#0C5145] text-white"
+            : "hover:bg-white/[0.08]",
+        )}
+      >
+        <Icon className="h-4 w-4" strokeWidth={2} />
+        <span className="truncate">{item.label}</span>
+        <ChevronRight
+          className={classNames(
+            "h-3.5 w-3.5 justify-self-end text-white/80",
+            item.expanded && "rotate-90",
+          )}
+        />
+      </a>
+      {item.children && (
+        <div className="ml-[18px] mt-1 space-y-1 border-l border-white/15 pl-2.5">
+          {item.children.map((child) => (
+            <a
+              href="#"
+              key={child.label}
+              className={classNames(
+                "flex h-7 items-center gap-2 rounded-md px-2 text-[12px] font-medium",
+                child.active
+                  ? "bg-[#079455] text-white"
+                  : "text-white/75 hover:bg-white/[0.08]",
+              )}
+            >
+              <span className="h-1 w-1 rounded-full bg-current" />
+              {child.label}
+            </a>
+          ))}
+        </div>
       )}
-    >
-      <Icon className="h-3.5 w-3.5" strokeWidth={2} />
-      <span className="truncate">{item.label}</span>
-      {item.chevron === false ? null : (
-        <ChevronRight className="h-3.5 w-3.5 justify-self-end text-white/80" />
-      )}
-    </a>
+    </div>
   );
 }
 
 function Sidebar() {
   return (
-    <aside className="fixed inset-y-0 left-0 z-20 flex w-[220px] flex-col overflow-hidden bg-[radial-gradient(circle_at_18%_0%,rgba(7,148,85,0.22),transparent_26%),linear-gradient(180deg,#061320_0%,#0B2234_100%)] text-white">
-      <div className="flex items-center gap-2.5 px-4 pb-4 pt-5">
+    <aside className="fixed inset-y-0 left-0 z-20 flex w-[235px] flex-col overflow-hidden bg-[linear-gradient(180deg,#061827_0%,#082236_100%)] text-white">
+      <div className="flex h-[68px] items-center gap-2.5 border-b border-white/10 px-4">
         <PineLogo />
         <div>
-          <p className="text-[24px] font-medium leading-none tracking-[-0.01em]">
-            Pine Labs
-          </p>
-          <p className="mt-1.5 text-[11px] font-medium text-white/[0.78]">
+          <p className="text-[23px] font-semibold leading-none">Pine Labs</p>
+          <p className="mt-1 text-[11px] font-medium text-white/70">
             Admin Portal
           </p>
         </div>
       </div>
-
-      <nav className="scrollbar-none flex-1 overflow-y-auto px-3 pb-3">
-        {navSections.map((section, index) => (
-          <div key={section.label || "dashboard"}>
-            {section.label && (
-              <p
-                className={classNames(
-                  "mb-1.5 mt-3 border-white/10 px-1 text-[10px] font-medium uppercase leading-none text-white/[0.76]",
-                  index > 1 && "border-t pt-3",
-                )}
-              >
-                {section.label}
-              </p>
-            )}
+      <nav className="scrollbar-none flex-1 overflow-y-auto px-3 py-4">
+        {navSections.map((section) => (
+          <div key={section.label} className="mb-4">
+            <p className="mb-2 px-1 text-[10px] font-bold uppercase tracking-wide text-white/55">
+              {section.label}
+            </p>
             <div className="space-y-1">
               {section.items.map((item) => (
                 <SidebarItem key={item.label} item={item} />
@@ -387,10 +359,9 @@ function Sidebar() {
           </div>
         ))}
       </nav>
-
-      <div className="px-3 pb-3">
-        <button className="flex h-9 w-full items-center gap-2 rounded-lg bg-white/[0.07] px-3 text-[11px] font-semibold text-white/[0.92]">
-          <ChevronLeft className="h-3.5 w-3.5" />
+      <div className="p-3">
+        <button className="flex h-10 w-full items-center gap-2 rounded-lg bg-white/[0.07] px-3 text-[12px] font-semibold text-white/90">
+          <ChevronLeft className="h-4 w-4" />
           Collapse Menu
         </button>
       </div>
@@ -400,26 +371,25 @@ function Sidebar() {
 
 function Topbar() {
   return (
-    <header className="sticky top-0 z-10 grid h-[58px] grid-cols-[1fr_auto_1fr] items-center border-b border-[#E5EAF0] bg-white/95 px-8 backdrop-blur">
+    <header className="sticky top-0 z-10 grid h-[60px] grid-cols-[1fr_auto_1fr] items-center border-b border-[#E5EAF0] bg-white px-6">
       <div />
-      <label className="flex h-9 w-[650px] items-center gap-3 rounded-lg border border-[#E5EAF0] bg-white px-3 shadow-[0_4px_18px_rgba(16,24,40,0.03)]">
+      <label className="flex h-9 w-[510px] items-center gap-3 rounded-lg border border-[#D0D7E2] bg-white px-3">
         <Search className="h-4 w-4 text-[#475467]" />
         <input
-          className="w-full border-0 bg-transparent text-[12px] font-medium text-[#667085] outline-none placeholder:text-[#667085]"
+          className="w-full border-0 bg-transparent text-[13px] font-medium text-[#667085] outline-none placeholder:text-[#52637C]"
           placeholder="Search for users, campaigns, reports, settings and more..."
         />
-        <kbd className="rounded-md bg-[#F2F4F7] px-2.5 py-1 text-[11px] font-semibold leading-none text-[#475467]">
+        <kbd className="rounded-md border border-[#D9E1EC] bg-[#F8FAFC] px-2 py-1 text-[11px] font-semibold leading-none text-[#475467]">
           ⌘ K
         </kbd>
       </label>
-
       <div className="flex items-center justify-end gap-4">
-        <button className="grid h-8 w-8 place-items-center rounded-full text-[#344054]">
-          <HelpCircle className="h-5 w-5" />
+        <button className="grid h-8 w-8 place-items-center rounded-full border border-[#D9E1EC] text-[#0F1F3A]">
+          <HelpCircle className="h-[18px] w-[18px]" />
         </button>
-        <button className="relative grid h-8 w-8 place-items-center rounded-full text-[#344054]">
-          <Bell className="h-5 w-5" />
-          <span className="absolute right-1 top-0 grid h-4 min-w-4 place-items-center rounded-full bg-[#E40046] px-1 text-[9px] font-bold leading-none text-white">
+        <button className="relative grid h-8 w-8 place-items-center rounded-full border border-[#D9E1EC] text-[#0F1F3A]">
+          <Bell className="h-[18px] w-[18px]" />
+          <span className="absolute -right-1 -top-1 grid h-4 min-w-4 place-items-center rounded-full bg-[#E40046] px-1 text-[9px] font-bold leading-none text-white">
             12
           </span>
         </button>
@@ -427,42 +397,74 @@ function Topbar() {
           <div className="grid h-8 w-8 place-items-center rounded-full bg-[#079455] text-[11px] font-bold text-white">
             AS
           </div>
-          <div className="min-w-[84px]">
-            <p className="text-[12px] font-semibold leading-tight text-[#101828]">
+          <div className="min-w-[92px]">
+            <p className="text-[12px] font-bold leading-tight text-[#101828]">
               Ankit Sharma
             </p>
-            <p className="text-[10px] font-medium leading-tight text-[#667085]">
+            <p className="text-[10px] font-medium leading-tight text-[#344054]">
               Super Admin
             </p>
           </div>
-          <ChevronDown className="h-4 w-4 text-[#667085]" />
+          <ChevronDown className="h-4 w-4 text-[#344054]" />
         </div>
       </div>
     </header>
   );
 }
 
-function DashboardHeader() {
+function Breadcrumb() {
+  const crumbs = [
+    "Dashboard",
+    "Campaign & Program",
+    "Program Management",
+    "Program List",
+  ];
+
   return (
-    <div className="mb-4 flex items-start justify-between">
+    <nav className="mb-3 flex items-center gap-2 text-[12px] font-semibold text-[#465B7A]">
+      {crumbs.map((crumb, index) => (
+        <div
+          className={classNames(
+            "flex items-center gap-2",
+            index === crumbs.length - 1 && "text-[#101828]",
+          )}
+          key={crumb}
+        >
+          <span>{crumb}</span>
+          {index < crumbs.length - 1 && (
+            <ChevronRight className="h-3.5 w-3.5 text-[#7A8AA4]" />
+          )}
+        </div>
+      ))}
+    </nav>
+  );
+}
+
+function PageHeader() {
+  return (
+    <div className="mb-5 flex items-start justify-between gap-4">
       <div>
-        <h1 className="text-[24px] font-semibold leading-tight text-[#101828]">
-          Dashboard
+        <Breadcrumb />
+        <h1 className="text-[28px] font-bold leading-tight text-[#101828]">
+          Program List
         </h1>
-        <p className="mt-1 text-[13px] font-medium text-[#667085]">
-          Welcome back, Ankit Sharma! Here's what's happening with your programs.
+        <p className="mt-2 text-[14px] font-medium text-[#344054]">
+          View, monitor and manage engagement programs, campaign links, budgets
+          and approvals.
         </p>
       </div>
-      <div className="flex items-center gap-5">
-        <button className="flex h-10 items-center gap-2 rounded-lg bg-gradient-to-b from-[#12A864] to-[#079455] px-4 text-[12px] font-semibold text-white shadow-[0_8px_20px_rgba(7,148,85,0.22)]">
-          <Zap className="h-4 w-4 fill-white" />
-          Quick Actions
+      <div className="mt-8 flex items-center gap-3">
+        <button className="flex h-9 items-center gap-2 rounded-lg border border-[#D5DEEA] bg-white px-4 text-[12px] font-bold text-[#101828]">
+          <Download className="h-4 w-4" />
+          Export
+        </button>
+        <button className="flex h-9 items-center gap-8 rounded-lg border border-[#D5DEEA] bg-white px-4 text-[12px] font-bold text-[#101828]">
+          Bulk Actions
           <ChevronDown className="h-4 w-4" />
         </button>
-        <button className="flex h-10 min-w-[214px] items-center justify-between gap-3 rounded-lg border border-[#E5EAF0] bg-white px-4 text-[12px] font-semibold text-[#344054]">
-          <CalendarDays className="h-4 w-4 text-[#475467]" />
-          <span>15 May 2025 - 21 May 2025</span>
-          <ChevronDown className="h-4 w-4 text-[#667085]" />
+        <button className="flex h-9 items-center gap-2 rounded-lg bg-[#079455] px-5 text-[12px] font-bold text-white shadow-[0_10px_18px_rgba(7,148,85,0.18)]">
+          <Plus className="h-4 w-4" />
+          Create Program
         </button>
       </div>
     </div>
@@ -473,469 +475,487 @@ function KpiCard({ item }) {
   const Icon = item.icon;
 
   return (
-    <Card className="flex h-[110px] items-center gap-5 px-4">
+    <Card className="flex h-[96px] items-center gap-4 p-4">
       <div
         className={classNames(
-          "grid h-[52px] w-[52px] shrink-0 place-items-center rounded-xl",
-          item.iconClass,
+          "grid h-12 w-12 shrink-0 place-items-center rounded-lg",
+          item.tone,
         )}
       >
-        <Icon className="h-7 w-7" strokeWidth={2.1} />
+        <Icon className="h-[22px] w-[22px]" strokeWidth={2.2} />
       </div>
       <div>
-        <p className="text-[12px] font-semibold text-[#344054]">
-          {item.label}
-        </p>
-        <p className="mt-2 text-[24px] font-semibold tracking-[-0.01em] text-[#101828]">
+        <p className="text-[13px] font-bold text-[#0B3670]">{item.label}</p>
+        <p className="mt-0.5 text-[31px] font-bold leading-none tracking-tight text-[#111B3E]">
           {item.value}
         </p>
-        <p className="mt-2 text-[12px] font-semibold text-[#079455]">
-          ↑ {item.trend}
-          <span className="ml-1.5 font-medium text-[#667085]">vs last week</span>
+        <p className="mt-2 text-[12px] font-medium text-[#405678]">
+          {item.description}
         </p>
       </div>
     </Card>
   );
 }
 
-function KpiRow() {
+function KpiCards() {
   return (
-    <section className="mb-4 grid grid-cols-5 gap-5">
+    <section className="mb-4 grid grid-cols-4 gap-3.5">
       {kpis.map((item) => (
-        <KpiCard key={item.label} item={item} />
+        <KpiCard item={item} key={item.label} />
       ))}
     </section>
   );
 }
 
-function CampaignPerformanceCard() {
+function StatusTabs() {
   return (
-    <Card className="col-span-6 h-[296px] p-4">
-      <CardHeader title="Campaign Performance">
-        <button className="flex h-8 min-w-[124px] items-center justify-between gap-3 rounded-lg border border-[#E5EAF0] bg-white px-3 text-[12px] font-medium text-[#344054]">
-          All Campaigns
-          <ChevronDown className="h-4 w-4 text-[#667085]" />
+    <div className="mb-0 flex h-10 items-end gap-8 border-b border-[#D9E1EC]">
+      {tabs.map(([label, count], index) => (
+        <button
+          key={label}
+          className={classNames(
+            "flex h-9 items-center gap-2 border-b-2 text-[12px] font-bold",
+            index === 0
+              ? "border-[#079455] text-[#075E38]"
+              : "border-transparent text-[#1F3150]",
+          )}
+        >
+          {label}
+          <span
+            className={classNames(
+              "rounded-full px-2 py-0.5 text-[10px] font-bold",
+              index === 0
+                ? "bg-emerald-50 text-[#079455]"
+                : "bg-[#EEF2F6] text-[#667085]",
+            )}
+          >
+            {count}
+          </span>
         </button>
-      </CardHeader>
+      ))}
+    </div>
+  );
+}
 
-      <div className="mt-2 flex items-center justify-center gap-5 text-[11px] font-medium text-[#344054]">
-        <span className="flex items-center gap-2">
-          <i className="h-0.5 w-4 bg-[#079455]" />
-          This Week
-        </span>
-        <span className="flex items-center gap-2">
-          <i className="h-0.5 w-4 border-t border-dashed border-[#7A8EAE]" />
-          Last Week
-        </span>
+function Field({ label, children, className = "" }) {
+  return (
+    <label className={classNames("block", className)}>
+      <span className="mb-2 block text-[11px] font-bold text-[#101828]">
+        {label}
+      </span>
+      {children}
+    </label>
+  );
+}
+
+function InputBox({ children, wide }) {
+  return (
+    <div
+      className={classNames(
+        "flex h-8 items-center justify-between gap-2 rounded-md border border-[#D0D9E8] bg-white px-3 text-[12px] font-medium text-[#52637C]",
+        wide && "min-w-[330px]",
+      )}
+    >
+      {children}
+    </div>
+  );
+}
+
+function FilterPanel() {
+  return (
+    <Card className="mb-4 overflow-hidden p-0">
+      <div className="h-1 bg-[#079455]" />
+      <div className="space-y-4 p-4">
+        <div className="grid grid-cols-[1.7fr_0.9fr_0.9fr_0.9fr] gap-4">
+          <Field label="Search by program name or code">
+            <InputBox>
+              <span>Search by program name, code or owner...</span>
+              <Search className="h-4 w-4 text-[#0F2D55]" />
+            </InputBox>
+          </Field>
+          <Field label="Program Category">
+            <InputBox>
+              <span>All Categories</span>
+              <ChevronDown className="h-4 w-4 text-[#0F2D55]" />
+            </InputBox>
+          </Field>
+          <Field label="Owner">
+            <InputBox>
+              <span>All Owners</span>
+              <ChevronDown className="h-4 w-4 text-[#0F2D55]" />
+            </InputBox>
+          </Field>
+          <Field label="Status">
+            <InputBox>
+              <span>All Statuses</span>
+              <ChevronDown className="h-4 w-4 text-[#0F2D55]" />
+            </InputBox>
+          </Field>
+        </div>
+        <div className="grid grid-cols-[0.9fr_0.9fr_0.9fr_120px_80px_120px] items-end gap-4">
+          <Field label="Start / End Date">
+            <InputBox>
+              <span>Select date range</span>
+              <CalendarDays className="h-4 w-4 text-[#0F2D55]" />
+            </InputBox>
+          </Field>
+          <Field label="Budget Source">
+            <InputBox>
+              <span>All Budgets</span>
+              <ChevronDown className="h-4 w-4 text-[#0F2D55]" />
+            </InputBox>
+          </Field>
+          <Field label="Campaign Linkage">
+            <InputBox>
+              <span>Any linkage</span>
+              <ChevronDown className="h-4 w-4 text-[#0F2D55]" />
+            </InputBox>
+          </Field>
+          <button className="flex h-8 items-center justify-center gap-2 rounded-md border border-[#D0D9E8] bg-white text-[12px] font-bold text-[#101828]">
+            <Filter className="h-4 w-4" />
+            More Filters
+          </button>
+          <button className="h-8 rounded-md border border-[#D0D9E8] bg-white text-[12px] font-bold text-[#101828]">
+            Reset
+          </button>
+          <button className="h-8 rounded-md bg-[#079455] text-[12px] font-bold text-white">
+            Apply Filters
+          </button>
+        </div>
       </div>
-
-      <svg
-        className="mt-1 h-[208px] w-full overflow-visible"
-        viewBox="0 0 650 226"
-        role="img"
-        aria-label="Campaign performance chart"
-      >
-        <g stroke="#E5EAF0" strokeWidth="1">
-          <line x1="40" y1="18" x2="632" y2="18" />
-          <line x1="40" y1="62" x2="632" y2="62" />
-          <line x1="40" y1="106" x2="632" y2="106" />
-          <line x1="40" y1="150" x2="632" y2="150" />
-          <line x1="40" y1="194" x2="632" y2="194" />
-        </g>
-        <g fill="#101828" fontSize="11" fontWeight="500">
-          <text x="6" y="22">80K</text>
-          <text x="6" y="66">60K</text>
-          <text x="6" y="110">40K</text>
-          <text x="6" y="154">20K</text>
-          <text x="24" y="198">0</text>
-        </g>
-        <polyline
-          points="74,150 162,124 250,148 338,130 426,102 532,122 618,38"
-          fill="none"
-          stroke="#7A8EAE"
-          strokeDasharray="5 4"
-          strokeWidth="1.7"
-        />
-        <polyline
-          points="74,118 162,74 250,108 338,58 426,104 532,54 618,102"
-          fill="none"
-          stroke="#079455"
-          strokeWidth="1.9"
-        />
-        <g fill="white" stroke="#079455" strokeWidth="2">
-          <circle cx="74" cy="118" r="3.1" />
-          <circle cx="162" cy="74" r="3.1" />
-          <circle cx="250" cy="108" r="3.1" />
-          <circle cx="338" cy="58" r="3.1" />
-          <circle cx="426" cy="104" r="3.1" />
-          <circle cx="532" cy="54" r="3.1" />
-          <circle cx="618" cy="102" r="3.1" />
-        </g>
-        <g fill="#7A8EAE">
-          <circle cx="74" cy="150" r="2.3" />
-          <circle cx="162" cy="124" r="2.3" />
-          <circle cx="250" cy="148" r="2.3" />
-          <circle cx="338" cy="130" r="2.3" />
-          <circle cx="426" cy="102" r="2.3" />
-          <circle cx="532" cy="122" r="2.3" />
-          <circle cx="618" cy="38" r="2.3" />
-        </g>
-        <g fill="#101828" fontSize="10.5" fontWeight="500">
-          <text x="62" y="220">15 May</text>
-          <text x="150" y="220">16 May</text>
-          <text x="238" y="220">17 May</text>
-          <text x="326" y="220">18 May</text>
-          <text x="414" y="220">19 May</text>
-          <text x="520" y="220">20 May</text>
-          <text x="606" y="220">21 May</text>
-        </g>
-      </svg>
     </Card>
   );
 }
 
-function TopCampaignsCard() {
+function Badge({ label }) {
+  const styles = {
+    Approved: "bg-emerald-50 text-[#008A4A]",
+    "In Review": "bg-blue-50 text-[#155EEF]",
+    Pending: "bg-orange-50 text-[#B54708]",
+    Attention: "bg-red-50 text-[#D92D20]",
+    Draft: "bg-slate-100 text-[#667085]",
+    Active: "bg-emerald-50 text-[#008A4A]",
+    Paused: "bg-orange-50 text-[#B54708]",
+  };
+
   return (
-    <Card className="col-span-3 h-[296px] p-4">
-      <CardHeader title="Top Performing Campaigns" action="View All" />
-      <table className="mt-3 w-full text-left text-[12px]">
+    <span
+      className={classNames(
+        "inline-flex rounded-full px-2.5 py-1 text-[11px] font-bold",
+        styles[label] || "bg-slate-100 text-slate-600",
+      )}
+    >
+      {label}
+    </span>
+  );
+}
+
+function ProgressBar({ value, color }) {
+  return (
+    <div>
+      <p className="text-[12px] font-bold text-[#101828]">{value.amount}</p>
+      <div className="mt-1 h-1.5 rounded-full bg-[#E2EAF2]">
+        <div
+          className={classNames("h-1.5 rounded-full", color)}
+          style={{ width: `${value.used}%` }}
+        />
+      </div>
+      <p className="mt-1 text-[11px] font-semibold text-[#667085]">
+        {value.used}% used
+      </p>
+    </div>
+  );
+}
+
+function ProgramTable() {
+  return (
+    <Card className="overflow-hidden">
+      <div className="flex items-start justify-between p-4 pb-2">
+        <div>
+          <h2 className="text-[17px] font-bold text-[#101828]">
+            Program Directory
+          </h2>
+          <p className="mt-1 text-[12px] font-semibold text-[#50617D]">
+            Showing approved, draft and in-review programs with linked campaign
+            health.
+          </p>
+        </div>
+        <div className="flex items-center gap-2">
+          <button className="grid h-8 w-10 place-items-center rounded-md border border-[#D0D9E8] bg-white text-[#0F2D55]">
+            <RefreshCw className="h-4 w-4" />
+          </button>
+          <button className="flex h-8 items-center gap-2 rounded-md border border-[#D0D9E8] bg-white px-3 text-[12px] font-bold text-[#101828]">
+            <Columns3 className="h-4 w-4" />
+            Columns
+            <ChevronDown className="h-3.5 w-3.5" />
+          </button>
+          <button className="flex h-8 items-center gap-2 rounded-md border border-[#D0D9E8] bg-white px-3 text-[12px] font-bold text-[#101828]">
+            25 per page
+            <ChevronDown className="h-3.5 w-3.5" />
+          </button>
+        </div>
+      </div>
+      <table className="w-full table-fixed border-t border-[#D9E1EC] text-left">
         <thead>
-          <tr className="border-b border-[#E5EAF0] text-[11px] font-medium text-[#667085]">
-            <th className="pb-3 font-medium">Campaign Name</th>
-            <th className="pb-3 text-right font-medium">Redemptions</th>
-            <th className="pb-3 text-right font-medium" />
+          <tr className="bg-[#F8FAFC] text-[11px] font-bold text-[#132849]">
+            <th className="w-11 border-r border-[#D9E1EC] px-3 py-3">
+              <input type="checkbox" className="h-3.5 w-3.5 rounded" />
+            </th>
+            <th className="w-[198px] border-r border-[#D9E1EC] px-3 py-3">
+              <span className="inline-flex items-center gap-1">
+                Program / Code <ArrowUpDown className="h-3 w-3" />
+              </span>
+            </th>
+            <th className="w-[106px] border-r border-[#D9E1EC] px-3 py-3">
+              <span className="inline-flex items-center gap-1">
+                Owner <ArrowUpDown className="h-3 w-3" />
+              </span>
+            </th>
+            <th className="w-[112px] border-r border-[#D9E1EC] px-3 py-3">
+              <span className="inline-flex items-center gap-1">
+                Category <ArrowUpDown className="h-3 w-3" />
+              </span>
+            </th>
+            <th className="w-[82px] border-r border-[#D9E1EC] px-3 py-3">
+              Campaigns
+            </th>
+            <th className="w-[120px] border-r border-[#D9E1EC] px-3 py-3">
+              Date Range
+            </th>
+            <th className="w-[110px] border-r border-[#D9E1EC] px-3 py-3">
+              Budget Used
+            </th>
+            <th className="w-[92px] border-r border-[#D9E1EC] px-3 py-3">
+              Approval
+            </th>
+            <th className="w-[82px] px-3 py-3">Status</th>
           </tr>
         </thead>
-        <tbody className="font-medium text-[#101828]">
-          {campaignRows.map(([name, value, trend]) => (
-            <tr key={name} className="border-b border-[#EEF2F6] last:border-0">
-              <td className="py-2.5">{name}</td>
-              <td className="py-2.5 text-right">{value}</td>
-              <td className="py-2.5 text-right font-semibold text-[#079455]">
-                ↑ {trend}
+        <tbody>
+          {programs.map((program) => (
+            <tr
+              className="border-t border-[#D9E1EC] text-[12px] font-semibold text-[#101828]"
+              key={program.code}
+            >
+              <td className="border-r border-[#D9E1EC] px-3 py-3">
+                <input type="checkbox" className="h-3.5 w-3.5 rounded" />
+              </td>
+              <td className="border-r border-[#D9E1EC] px-3 py-3">
+                <div className="flex items-center gap-3">
+                  <span
+                    className={classNames(
+                      "grid h-8 w-8 shrink-0 place-items-center rounded-full text-[11px] font-bold text-white",
+                      program.avatarClass,
+                    )}
+                  >
+                    {program.avatar}
+                  </span>
+                  <div>
+                    <p className="leading-tight">{program.name}</p>
+                    <p className="mt-1 text-[11px] font-bold text-[#667085]">
+                      {program.code}
+                    </p>
+                  </div>
+                </div>
+              </td>
+              <td className="border-r border-[#D9E1EC] px-3 py-3">
+                {program.owner}
+              </td>
+              <td className="border-r border-[#D9E1EC] px-3 py-3">
+                {program.category}
+              </td>
+              <td className="border-r border-[#D9E1EC] px-3 py-3 font-bold text-[#0B3670]">
+                {program.campaigns}
+              </td>
+              <td className="border-r border-[#D9E1EC] px-3 py-3">
+                {program.dateRange}
+              </td>
+              <td className="border-r border-[#D9E1EC] px-3 py-3">
+                <ProgressBar
+                  value={{ amount: program.amount, used: program.used }}
+                  color={program.progressClass}
+                />
+              </td>
+              <td className="border-r border-[#D9E1EC] px-3 py-3">
+                <Badge label={program.approval} />
+              </td>
+              <td className="px-3 py-3">
+                <Badge label={program.status} />
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+      <div className="flex items-center justify-between border-t border-[#D9E1EC] px-4 py-3">
+        <p className="text-[12px] font-semibold text-[#465B7A]">
+          Showing 1 to 6 of 78 programs
+        </p>
+        <div className="flex items-center gap-2">
+          {["‹", "1", "2", "3", "...", "10", "›"].map((item) => (
+            <button
+              key={item}
+              className={classNames(
+                "grid h-8 min-w-8 place-items-center rounded-md border border-[#D0D9E8] px-2 text-[12px] font-semibold text-[#0F2D55]",
+                item === "1" && "border-[#079455] bg-emerald-50 text-[#079455]",
+              )}
+            >
+              {item}
+            </button>
+          ))}
+        </div>
+      </div>
     </Card>
   );
 }
 
-function RecentActivityCard() {
+function DonutChart() {
   return (
-    <Card className="col-span-3 h-[296px] p-4">
-      <CardHeader title="Recent Activity" action="View All" />
-      <ol className="relative mt-3 space-y-0 pl-7 before:absolute before:left-[9px] before:top-3 before:h-[184px] before:w-px before:bg-[#E5EAF0]">
-        {activities.map((item) => (
+    <div className="flex items-center gap-4">
+      <div
+        className="relative grid h-[112px] w-[112px] shrink-0 place-items-center rounded-full"
+        style={{
+          background:
+            "conic-gradient(#079455 0 61.5%, #F59E0B 61.5% 76.9%, #2563EB 76.9% 84.6%, #EF4444 84.6% 89.7%, #CBD5E1 89.7% 100%)",
+        }}
+      >
+        <div className="grid h-[70px] w-[70px] place-items-center rounded-full bg-white text-center">
+          <div>
+            <p className="text-[28px] font-bold leading-none text-[#111B3E]">
+              78
+            </p>
+            <p className="mt-1 text-[10px] font-bold text-[#465B7A]">Programs</p>
+          </div>
+        </div>
+      </div>
+      <ul className="flex-1 space-y-3">
+        {overview.map(([label, value, color]) => (
           <li
-            key={item.text}
-            className="relative border-b border-[#EEF2F6] pb-2.5 pt-0 first:pt-0 last:border-0"
+            className="grid grid-cols-[12px_1fr_auto] items-center gap-2 text-[12px] font-bold text-[#101828]"
+            key={label}
           >
             <span
-              className={classNames(
-                "absolute -left-[22px] top-1 h-2 w-2 rounded-full",
-                item.color,
-              )}
+              className="h-2.5 w-2.5 rounded-sm"
+              style={{ backgroundColor: color }}
             />
-            <p className="text-[12px] font-medium leading-snug text-[#101828]">
-              {item.text}
-            </p>
-            <p className="mt-1.5 text-[11px] font-medium text-[#667085]">
-              {item.time}
-            </p>
+            <span>{label}</span>
+            <span>{value}</span>
           </li>
         ))}
-      </ol>
-    </Card>
+      </ul>
+    </div>
   );
 }
 
-function ProgramStatusCard() {
+function SideCardHeader({ title, action }) {
   return (
-    <Card className="col-span-4 h-[188px] p-4">
-      <CardHeader title="Program Status" action="View All" />
-      <div className="mt-3 flex items-center gap-8">
-        <div
-          className="relative grid h-[112px] w-[112px] shrink-0 place-items-center rounded-full"
-          style={{
-            background:
-              "conic-gradient(#079455 0 51%, #2563EB 51% 72%, #7C3AED 72% 88%, #F97316 88% 100%)",
-          }}
-        >
-          <div className="grid h-[72px] w-[72px] place-items-center rounded-full bg-white text-center">
-            <div>
-              <p className="text-[20px] font-semibold leading-none text-[#101828]">
-                152
-              </p>
-              <p className="mt-2 text-[10px] font-semibold leading-none text-[#101828]">
-                Total Programs
-              </p>
-            </div>
-          </div>
-        </div>
-        <ul className="flex-1 space-y-2.5">
-          {statusItems.map(([label, value, color]) => (
-            <li
-              key={label}
-              className="grid grid-cols-[14px_1fr_auto] items-center gap-2 text-[12px] font-medium text-[#344054]"
+    <div className="mb-4 flex items-center justify-between">
+      <h2 className="text-[16px] font-bold text-[#111B3E]">{title}</h2>
+      {action && (
+        <a href="#" className="text-[11px] font-bold text-[#079455]">
+          {action}
+        </a>
+      )}
+    </div>
+  );
+}
+
+function RightPanel() {
+  return (
+    <aside className="space-y-4">
+      <Card className="p-4">
+        <SideCardHeader title="Program Overview" action="View Report" />
+        <DonutChart />
+      </Card>
+      <Card className="p-4">
+        <SideCardHeader title="Recently Updated" action="View All" />
+        <div className="space-y-0">
+          {recentlyUpdated.map((item) => (
+            <div
+              key={item.name}
+              className="grid grid-cols-[28px_1fr_auto] items-center gap-3 border-b border-[#EEF2F6] py-2.5 last:border-0"
             >
               <span
-                className="h-3 w-3 rounded"
-                style={{ backgroundColor: color }}
-              />
-              <span>{label}</span>
-              <strong className="text-[11px] font-semibold text-[#101828]">
-                {value}
-              </strong>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </Card>
-  );
-}
-
-function Sparkline({ color, points }) {
-  return (
-    <svg className="mt-1.5 h-7 w-full" viewBox="0 0 200 48">
-      <polyline
-        points={points}
-        fill="none"
-        stroke={color}
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <circle cx="190" cy="24" r="0.1" fill={color} />
-    </svg>
-  );
-}
-
-function WalletSummaryCard() {
-  return (
-    <Card className="col-span-4 h-[188px] p-4">
-      <CardHeader title="Wallet Summary" action="View Details" />
-      <div className="mt-3 grid grid-cols-3 gap-3">
-        {walletMetrics.map((metric) => (
-          <div
-            key={metric.label}
-            className="h-[112px] rounded-lg border border-[#E5EAF0] bg-white p-3"
-          >
-            <p className="text-[11px] font-medium text-[#344054]">
-              {metric.label}
-            </p>
-            <p className="mt-1.5 whitespace-nowrap text-[16px] font-semibold tracking-[-0.01em] text-[#101828]">
-              {metric.value}
-            </p>
-            <p className="mt-1 text-[10px] font-semibold text-[#079455]">
-              ↑ {metric.trend}
-              <span className="ml-1 font-medium text-[#667085]">
-                vs last week
-              </span>
-            </p>
-            <Sparkline color={metric.color} points={metric.points} />
-          </div>
-        ))}
-      </div>
-    </Card>
-  );
-}
-
-function RedemptionSummaryCard() {
-  return (
-    <Card className="col-span-4 h-[188px] p-4">
-      <CardHeader title="Redemption Summary" action="View Details" />
-      <div className="mt-3 flex items-center gap-6">
-        <div className="relative h-[109px] w-[170px] shrink-0">
-          <svg viewBox="0 0 220 130" className="h-full w-full">
-            <path
-              d="M34 108 A76 76 0 0 1 186 108"
-              fill="none"
-              stroke="#E8EAEE"
-              strokeWidth="28"
-              strokeLinecap="butt"
-            />
-            <path
-              d="M34 108 A76 76 0 0 1 186 108"
-              fill="none"
-              stroke="#7C3AED"
-              strokeWidth="28"
-              strokeDasharray="162 239"
-              strokeLinecap="butt"
-            />
-          </svg>
-          <div className="absolute inset-x-0 bottom-2 text-center">
-            <p className="text-[20px] font-semibold leading-none text-[#101828]">
-              68%
-            </p>
-            <p className="mt-2 text-[11px] font-semibold text-[#101828]">
-              Redemption Rate
-            </p>
-          </div>
-        </div>
-        <dl className="grid flex-1 grid-cols-[1fr_auto] gap-x-4 gap-y-6 text-[12px]">
-          <dt className="font-medium text-[#667085]">Total Redemption Value</dt>
-          <dd className="font-semibold text-[#101828]">₹ 1,23,45,678</dd>
-          <dt className="font-medium text-[#667085]">Total Redeemed</dt>
-          <dd className="font-semibold text-[#101828]">98,765</dd>
-          <dt className="font-medium text-[#667085]">Pending Redemption</dt>
-          <dd className="font-semibold text-[#101828]">12,345</dd>
-        </dl>
-      </div>
-    </Card>
-  );
-}
-
-function PendingApprovalsCard() {
-  return (
-    <Card className="col-span-4 h-[186px] p-4">
-      <CardHeader title="Pending Approvals" action="View All" />
-      <div className="mt-3 grid grid-cols-5 gap-3">
-        {approvals.map((item) => {
-          const Icon = item.icon;
-          return (
-            <div
-              key={item.label}
-              className="flex h-[105px] flex-col items-center justify-center rounded-xl border border-[#E5EAF0] bg-white text-center"
-            >
-              <div
                 className={classNames(
-                  "grid h-10 w-10 place-items-center rounded-xl",
-                  item.iconClass,
+                  "grid h-6 w-6 place-items-center rounded-full text-[9px] font-bold text-white",
+                  item.avatarClass,
                 )}
               >
-                <Icon className="h-5 w-5" />
+                {item.avatar}
+              </span>
+              <div>
+                <p className="text-[12px] font-bold text-[#101828]">
+                  {item.name}
+                </p>
+                <p className="text-[10px] font-semibold text-[#667085]">
+                  {item.note}
+                </p>
               </div>
-              <p className="mt-2 h-4 text-[10px] font-semibold text-[#344054]">
-                {item.label}
-              </p>
-              <span
-                className={classNames(
-                  "mt-2 grid h-7 min-w-8 place-items-center rounded-full px-2 text-[12px] font-bold",
-                  item.badgeClass,
-                )}
-              >
-                {item.count}
-              </span>
-            </div>
-          );
-        })}
-      </div>
-    </Card>
-  );
-}
-
-function AlertsCard() {
-  return (
-    <Card className="col-span-4 h-[186px] p-4">
-      <CardHeader title="Alerts & Notifications" action="View All" />
-      <div className="mt-3 space-y-1.5">
-        {alerts.map((alert) => {
-          const Icon = alert.icon;
-          return (
-            <div
-              key={alert.text}
-              className="grid min-h-8 grid-cols-[36px_1fr_auto] items-center gap-3"
-            >
-              <span
-                className={classNames(
-                  "grid h-8 w-8 place-items-center rounded-lg",
-                  alert.tone,
-                )}
-              >
-                <Icon className="h-4 w-4" />
-              </span>
-              <p className="truncate text-[12px] font-medium text-[#101828]">
-                {alert.text}
-              </p>
-              <time className="text-[10px] font-medium text-[#667085]">
-                {alert.time}
+              <time className="text-[10px] font-bold text-[#52637C]">
+                {item.time}
               </time>
             </div>
-          );
-        })}
-      </div>
-    </Card>
-  );
-}
-
-function QuickLinksCard() {
-  return (
-    <Card className="col-span-4 h-[186px] p-4">
-      <CardHeader title="Quick Links" />
-      <div className="mt-3 grid grid-cols-4 gap-3">
-        {quickLinks.map(([label, Icon, tone]) => (
-          <button
-            key={label}
-            className="flex h-12 flex-col items-center justify-center gap-1 rounded-lg border border-[#E5EAF0] bg-white text-center"
-          >
-            <span className={classNames("grid h-7 w-7 place-items-center rounded-lg", tone)}>
-              <Icon className="h-4 w-4" />
-            </span>
-            <span className="text-[10px] font-semibold text-[#344054]">
+          ))}
+        </div>
+      </Card>
+      <Card className="p-4">
+        <SideCardHeader title="Quick Actions" />
+        <div className="space-y-1">
+          {quickActions.map(([label, Icon]) => (
+            <button
+              key={label}
+              className="grid h-9 w-full grid-cols-[28px_1fr_16px] items-center gap-2 border-b border-[#EEF2F6] text-left text-[12px] font-bold text-[#101828] last:border-0"
+            >
+              <span className="grid h-6 w-6 place-items-center rounded-md bg-emerald-50 text-[#079455]">
+                <Icon className="h-3.5 w-3.5" />
+              </span>
               {label}
-            </span>
-          </button>
-        ))}
-      </div>
-    </Card>
+              <ChevronRight className="h-4 w-4 justify-self-end text-[#0F2D55]" />
+            </button>
+          ))}
+        </div>
+      </Card>
+      <Card className="overflow-hidden bg-[#F8FCFA] p-4">
+        <div className="mb-3 flex items-center gap-3">
+          <span className="grid h-8 w-8 place-items-center rounded-lg bg-emerald-50 text-[#079455]">
+            <CircleHelp className="h-4 w-4" />
+          </span>
+          <h2 className="text-[16px] font-bold text-[#111B3E]">Need Help?</h2>
+        </div>
+        <p className="text-[12px] font-medium leading-snug text-[#405678]">
+          Review program setup guidelines, approval rules and budget linkage
+          before publishing high-impact programs.
+        </p>
+        <button className="mt-4 flex h-8 w-[138px] items-center justify-center gap-2 rounded-md border border-[#D0D9E8] bg-white text-[12px] font-bold text-[#101828]">
+          <ExternalLink className="h-4 w-4" />
+          View Help Docs
+        </button>
+        <a
+          href="#"
+          className="mt-4 flex items-center justify-between text-[12px] font-bold text-[#079455]"
+        >
+          Contact Support
+          <ArrowRight className="h-5 w-5" />
+        </a>
+      </Card>
+    </aside>
   );
 }
 
-function SmartAssistantBanner() {
-  return (
-    <section className="flex h-[58px] items-center justify-between rounded-xl border border-[#E1F1E9] bg-gradient-to-r from-[#EFFAF3] to-[#F7FAF9] px-5">
-      <div className="flex items-center gap-4">
-        <div className="grid h-9 w-9 place-items-center rounded-full text-[#079455]">
-          <Lightbulb className="h-7 w-7" strokeWidth={1.8} />
-        </div>
-        <div>
-          <p className="text-[12px] font-semibold text-[#101828]">
-            Smart Assistant
-          </p>
-          <p className="mt-1 text-[11px] font-medium text-[#667085]">
-            Need help with something? Ask me or explore our guided workflows.
-          </p>
-        </div>
-      </div>
-      <button className="flex h-9 items-center gap-2 rounded-lg bg-gradient-to-b from-[#12A864] to-[#079455] px-5 text-[12px] font-semibold text-white shadow-[0_8px_20px_rgba(7,148,85,0.18)]">
-        <Zap className="h-4 w-4 fill-white" />
-        Ask Assistant
-      </button>
-    </section>
-  );
-}
-
-function Dashboard() {
+function ProgramListPage() {
   return (
     <div className="min-h-screen bg-[#F8FAFC]">
       <Sidebar />
-      <main className="ml-[220px] min-h-screen">
+      <main className="ml-[235px] min-h-screen">
         <Topbar />
-        <div className="px-8 py-5">
-          <DashboardHeader />
-          <KpiRow />
-
-          <section className="mb-4 grid grid-cols-12 gap-4">
-            <CampaignPerformanceCard />
-            <TopCampaignsCard />
-            <RecentActivityCard />
+        <div className="grid grid-cols-[minmax(0,1fr)_286px] gap-5 p-6">
+          <section className="min-w-0">
+            <PageHeader />
+            <KpiCards />
+            <StatusTabs />
+            <FilterPanel />
+            <ProgramTable />
           </section>
-
-          <section className="mb-4 grid grid-cols-12 gap-4">
-            <ProgramStatusCard />
-            <WalletSummaryCard />
-            <RedemptionSummaryCard />
-          </section>
-
-          <section className="mb-4 grid grid-cols-12 gap-4">
-            <PendingApprovalsCard />
-            <AlertsCard />
-            <QuickLinksCard />
-          </section>
-
-          <SmartAssistantBanner />
+          <RightPanel />
         </div>
       </main>
     </div>
@@ -943,5 +963,5 @@ function Dashboard() {
 }
 
 export default function App() {
-  return <Dashboard />;
+  return <ProgramListPage />;
 }
