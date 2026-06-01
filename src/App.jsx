@@ -34,6 +34,8 @@ import {
   User,
   Wallet,
 } from "lucide-react";
+import { BrowserRouter, Link, Navigate, Route, Routes, useLocation } from "react-router-dom";
+import ProductList from "./ProductList.jsx";
 
 const navSections = [
   {
@@ -59,7 +61,12 @@ const navSections = [
   {
     label: "Product & Catalogue",
     items: [
-      { label: "Products", icon: ShoppingBag },
+      {
+        label: "Products",
+        icon: ShoppingBag,
+        route: "/product-list",
+        children: [{ label: "Product List", route: "/product-list" }],
+      },
       { label: "Catalogue", icon: FileText },
       { label: "QR & Product Assets", icon: QrCode },
     ],
@@ -70,9 +77,8 @@ const navSections = [
       {
         label: "Program Management",
         icon: Home,
-        activeParent: true,
-        expanded: true,
-        children: [{ label: "Program List", active: true }],
+        route: "/",
+        children: [{ label: "Program List", route: "/" }],
       },
       { label: "Campaign Management", icon: Megaphone },
       { label: "Scheme Management", icon: Layers },
@@ -287,16 +293,27 @@ function PineLogo() {
   );
 }
 
+function isRouteActive(pathname, route) {
+  return route === "/" ? pathname === "/" : pathname === route;
+}
+
 function SidebarItem({ item }) {
   const Icon = item.icon;
+  const { pathname } = useLocation();
+  const childActive = item.children?.some((child) =>
+    isRouteActive(pathname, child.route),
+  );
+  const parentActive = childActive || isRouteActive(pathname, item.route);
+  const expanded = item.children && (item.label === "Products" || parentActive);
+  const href = item.route || "#";
 
   return (
     <div>
-      <a
-        href="#"
+      <Link
+        to={href}
         className={classNames(
           "grid h-8 grid-cols-[18px_1fr_14px] items-center gap-2 rounded-lg px-2 text-[12px] font-semibold text-white/[0.92] transition",
-          item.activeParent
+          parentActive
             ? "bg-[#0C5145] text-white"
             : "hover:bg-white/[0.08]",
         )}
@@ -306,26 +323,26 @@ function SidebarItem({ item }) {
         <ChevronRight
           className={classNames(
             "h-3.5 w-3.5 justify-self-end text-white/80",
-            item.expanded && "rotate-90",
+            expanded && "rotate-90",
           )}
         />
-      </a>
-      {item.children && (
+      </Link>
+      {expanded && (
         <div className="ml-[18px] mt-1 space-y-1 border-l border-white/15 pl-2.5">
           {item.children.map((child) => (
-            <a
-              href="#"
+            <Link
+              to={child.route}
               key={child.label}
               className={classNames(
                 "flex h-7 items-center gap-2 rounded-md px-2 text-[12px] font-medium",
-                child.active
+                isRouteActive(pathname, child.route)
                   ? "bg-[#079455] text-white"
                   : "text-white/75 hover:bg-white/[0.08]",
               )}
             >
               <span className="h-1 w-1 rounded-full bg-current" />
               {child.label}
-            </a>
+            </Link>
           ))}
         </div>
       )}
@@ -943,25 +960,39 @@ function RightPanel() {
 
 function ProgramListPage() {
   return (
+    <div className="grid grid-cols-[minmax(0,1fr)_286px] gap-5 p-6">
+      <section className="min-w-0">
+        <PageHeader />
+        <KpiCards />
+        <StatusTabs />
+        <FilterPanel />
+        <ProgramTable />
+      </section>
+      <RightPanel />
+    </div>
+  );
+}
+
+function AppShell() {
+  return (
     <div className="min-h-screen bg-[#F8FAFC]">
       <Sidebar />
       <main className="ml-[235px] min-h-screen">
         <Topbar />
-        <div className="grid grid-cols-[minmax(0,1fr)_286px] gap-5 p-6">
-          <section className="min-w-0">
-            <PageHeader />
-            <KpiCards />
-            <StatusTabs />
-            <FilterPanel />
-            <ProgramTable />
-          </section>
-          <RightPanel />
-        </div>
+        <Routes>
+          <Route path="/" element={<ProgramListPage />} />
+          <Route path="/product-list" element={<ProductList />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
       </main>
     </div>
   );
 }
 
 export default function App() {
-  return <ProgramListPage />;
+  return (
+    <BrowserRouter basename="/Engage-Hub-Admin">
+      <AppShell />
+    </BrowserRouter>
+  );
 }
