@@ -35,12 +35,14 @@ import {
   Wallet,
 } from "lucide-react";
 import { BrowserRouter, Link, Navigate, Route, Routes, useLocation } from "react-router-dom";
+import Dashboard from "./Dashboard.jsx";
 import ProductList from "./ProductList.jsx";
+import { ROUTES } from "./routes/appRoutes.js";
 
 const navSections = [
   {
     label: "Dashboard",
-    items: [{ label: "Dashboard", icon: Home }],
+    items: [{ label: "Dashboard", icon: Home, route: ROUTES.dashboard }],
   },
   {
     label: "User & Access",
@@ -64,8 +66,8 @@ const navSections = [
       {
         label: "Products",
         icon: ShoppingBag,
-        route: "/product-list",
-        children: [{ label: "Product List", route: "/product-list" }],
+        route: ROUTES.productList,
+        children: [{ label: "Product List", route: ROUTES.productList }],
       },
       { label: "Catalogue", icon: FileText },
       { label: "QR & Product Assets", icon: QrCode },
@@ -77,8 +79,8 @@ const navSections = [
       {
         label: "Program Management",
         icon: Home,
-        route: "/",
-        children: [{ label: "Program List", route: "/" }],
+        route: ROUTES.programList,
+        children: [{ label: "Program List", route: ROUTES.programList }],
       },
       { label: "Campaign Management", icon: Megaphone },
       { label: "Scheme Management", icon: Layers },
@@ -980,9 +982,11 @@ function AppShell() {
       <main className="ml-[235px] min-h-screen">
         <Topbar />
         <Routes>
-          <Route path="/" element={<ProgramListPage />} />
-          <Route path="/product-list" element={<ProductList />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="/" element={<Navigate to={ROUTES.dashboard} replace />} />
+          <Route path={ROUTES.dashboard} element={<Dashboard />} />
+          <Route path={ROUTES.programList} element={<ProgramListPage />} />
+          <Route path={ROUTES.productList} element={<ProductList />} />
+          <Route path="*" element={<Navigate to={ROUTES.dashboard} replace />} />
         </Routes>
       </main>
     </div>
